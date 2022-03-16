@@ -1,0 +1,11 @@
+# This was my first successfull attempt at compiling
+
+main: main.o function.o
+	g++ -L${mkBoostLib} -lboost_system -lboost_filesystem -lboost_iostreams main.o function.o -o main
+
+main.o: main.cpp	
+	g++ -I${HOME}/PACS/pacs-examples/Examples/include -I${mkBoostInc} -c main.cpp
+#	g++ -I${HOME}/PACS/pacs-examples/Examples/include -I/u/sw/toolchains/gcc-glibc/11.2.0/pkgs/boost/1.76.0/include -DGNUPLOT	-c main.cpp 
+
+function.o: function.cpp function.hpp
+	  g++ -c function.cpp

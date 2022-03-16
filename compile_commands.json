@@ -1,0 +1,26 @@
+[
+    {
+        "arguments": [
+            "g++",
+            "-c",
+            "-I/home/geonove/PACS/pacs-examples/Examples/include",
+            "-I/u/sw/toolchains/gcc-glibc/11.2.0/pkgs/boost/1.76.0/include",
+            "-DGNUPLOT",
+            "main.cpp"
+        ],
+        "directory": "/home/geonove/PACS/challenges/challenge1",
+        "file": "main.cpp"
+    },
+    {
+        "arguments": [
+            "g++",
+            "-c",
+            "-I/home/geonove/PACS/pacs-examples/Examples/include",
+            "-I/u/sw/toolchains/gcc-glibc/11.2.0/pkgs/boost/1.76.0/include",
+            "-DGNUPLOT",
+            "function.cpp"
+        ],
+        "directory": "/home/geonove/PACS/challenges/challenge1",
+        "file": "function.cpp"
+    }
+]
