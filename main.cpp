@@ -57,6 +57,7 @@ int main() {
 	{
 		u.push_back(u_ex(t_n[i]));
 	}
+
 	// Create and save the results in a file called "result.dat"
 	std::cout << "Result file: result.dat" << std::endl;
 	std::ofstream f("result.dat");
@@ -69,7 +70,7 @@ int main() {
 		f << t_n[i] << "\t\t" << u_n[i] << "\t\t" << u[i] << "\n";
 	}
 
-	std::cout << t_n.size() << " " << u_n.size() << " " << u.size();
+	// Plot the computed solution and the exact solution using GnuPlot
 	Gnuplot gp;
 	gp << "plot" << gp.file1d(std::tie(t_n, u_n)) << "w lp lw 2 title 'un'," << gp.file1d(std::tie(t_n, u)) << "w l lw 2 title 'uex'" << std::endl;
 	
