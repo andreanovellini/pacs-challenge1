@@ -24,15 +24,18 @@ Newton(Function const &f, double h, double a, double tol, double tola, unsigned 
  * Solves the initial value problem using backward Euler scheme
  *
  * @param t vector of time nodes
- * @param u vector of the numeric solution computed in the nodes' vector
- * #param f the right hand side of the ODE
+ * @param u vector of the numeric solution computed in each time node
+ * @param f the right hand side of the ODE
+ * @oaram t0 initial time
+ * @param u0 intiial solution
  * @param T the final time
  * @param N the number of steps
- * @return the vector containing t_n and u_n for all n
+ * @param theta is the parameter for the choice of the method
+ * @return the status (1 if converged, 0 if not)
  *
  */
 bool
-solver(std::vector<double> &t, std::vector<double> &u, const std::function<double(const double &, const double &)> &f, const double &t0, const double &y0, const double &T, const unsigned int &N); 
+solver(std::vector<double> &t, std::vector<double> &u, const std::function<double(const double &, const double &)> &f, const double &t0, const double &u0, const double &T, const unsigned int &N, const double &theta); 
 
 
 #endif

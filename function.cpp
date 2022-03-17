@@ -1,8 +1,5 @@
 #include "function.hpp"
 #include <cmath>
-#include <functional>
-#include <tuple>
-#include <vector>
 #include <iostream>
 
 template <class Function>
@@ -14,9 +11,10 @@ Newton(const Function &f, double h, double a , double tol = 1e-4, double tola = 
 	unsigned int iter{0u};
 	double check = tol * resid + tola;
 	bool goOn = resid > check;
- 	while (goOn && iter < maxIt) {
+ 	while (goOn && iter < maxIt) 
+	{
  		++iter;
-		const double df = (f(a+h)-f(a-h))/(2*h);
+		const double df = (f(a+h)-f(a-h))/(2.*h);
 		a += -ya/df;
 		ya = f(a); 
 		resid = std::abs(ya);
@@ -27,19 +25,22 @@ Newton(const Function &f, double h, double a , double tol = 1e-4, double tola = 
 };
 
 bool
-solver(std::vector<double> &t, std::vector<double> &u, const std::function<double (const double &, const double &)> &f, const double &t0, const double &y0, const double &T, const unsigned int &N)
+solver(std::vector<double> &t, std::vector<double> &u, const std::function<double (const double &, const double &)> &f, const double &t0, const double &u0, const double &T, const unsigned int &N, const double &theta)
 {
-	const double h = T/static_cast<double>(N);
-	t.push_back(t0);
-	u.push_back(y0);
+	const double h = (T - t0)/static_cast<double>(N);	// time step
+	t.push_back(t0);	// initial time
+	u.push_back(u0);	// initial solution
 
-	for(unsigned int n = 0; n < N - 1; n++){
-		double t_n_plus_1 = t[n] + h;
-		t.push_back(t_n_plus_1);
-		double u_n = u[n];
-		auto F = [h, f, t_n_plus_1, u_n](const double &x) {return x-h*f(t_n_plus_1, x) - u_n;};
-		auto res = Newton(F, h, u_n);
-		if(std::get<1>(res)==0){
+	for (unsigned int n = 0; n < N - 1; n++)
+	{
+		t.push_back(t.at(n)+h);	// new time instant
+		
+		auto F = [h, f, n, &t, &u, theta](const double &x) {return x-h*theta*f(t.at(n+1), x)-h*(1-theta)*f(t.at(n), u.at(n))-u.at(n);}; // function to pass in the Newton method 
+		
+		auto res = Newton(F, h, u.at(n)); // solution in the new time node
+
+		if (!std::get<1>(res))
+		{
 			std::cout << "Did not converge at time " << t.at(n+1) << std::endl;
 			return 0;	 		
 		}
