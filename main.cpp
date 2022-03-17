@@ -3,10 +3,13 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+#include <GetPot>
 
 #include "gnuplot-iostream.hpp"
-
 #include "function.hpp"
+
+// Right hand side of the ODE 
+
 double fun(const double &t, const double &y)
 {
 	return -t * std::exp(-y);
@@ -17,33 +20,21 @@ double u_ex(const double &t)
 	return std::log(1 - t*t/2.);
 }
 
-int main() {
+int main(int argc, char **argv) {
 	std::cout << "======== ODE solver	========\n" << std::endl;
+	
+	// Get the parameters using GetPot	
+	GetPot command_line(argc, argv);
 
-	// Readiing the parameters
-	// Initial condition on time
-	std::cout << "Insert t0: " << std::endl;
-	double t0;
-	std::cin >> t0;
-	// Initial condition of the solution
-	std::cout << "Insert y0: " << std::endl;
-	double y0; 
-	std::cin >> y0;
-	// Upper bound of the time interval
-	std::cout << "Insert T: " << std::endl;
-	double T; 
-	std::cin >> T;
-	// Number of points for the partitioning of the interval
-	std::cout << "Insert N; " << std::endl;
-	double N;
-	std::cin >> N;
-		
+	const double t0 = command_line("t0", 0);	// Initial time
+	const double y0 = command_line("y0", 0);	// Initial value
+	const double T = command_line("T", 1);	// Upper bound time
+	const unsigned int N = command_line("N", 100);	// Number of sub-intervals
+
 	// Creation of two vectors to stores the results in
-	// vector t_n stores the time points
-	// vector u_n stores the values of the computed at the respective time instant
-	std::vector<double> t_n{};
-	std::vector<double> u_n{};
-	// Since the size is known we reserve it to avoid reallocations 
+	std::vector<double> t_n{};	// time points
+	std::vector<double> u_n{};	// numeric solution
+	// Reserve to avoid reallocations, sinze size is known 
 	t_n.reserve(N);
 	u_n.reserve(N);
 
@@ -51,7 +42,7 @@ int main() {
 	bool res = solver(t_n, u_n, fun, y0, t0, T, N);	
 		
 	// Compute the exact solution
-	std::vector<double> u{};
+	std::vector<double> u{};	// exact solution
 	u.reserve(N);
 	for (int i = 0; i < u_n.size(); i++)
 	{

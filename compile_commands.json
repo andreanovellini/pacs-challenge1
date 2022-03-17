@@ -1,11 +1,13 @@
 [
     {
         "arguments": [
-            "g++",
+            "/u/sw/toolchains/gcc-glibc/11.2.0/prefix/bin/g++",
             "-c",
-            "-I/home/geonove/PACS/pacs-examples/Examples/include",
+            "-DNDEBUG",
             "-I/u/sw/toolchains/gcc-glibc/11.2.0/pkgs/boost/1.76.0/include",
-            "-DGNUPLOT",
+            "-std=c++17",
+            "-fPIC",
+            "-I./",
             "main.cpp"
         ],
         "directory": "/home/geonove/PACS/challenges/challenge1",
@@ -13,11 +15,12 @@
     },
     {
         "arguments": [
-            "g++",
+            "/u/sw/toolchains/gcc-glibc/11.2.0/prefix/bin/g++",
             "-c",
-            "-I/home/geonove/PACS/pacs-examples/Examples/include",
+            "-DNDEBUG",
             "-I/u/sw/toolchains/gcc-glibc/11.2.0/pkgs/boost/1.76.0/include",
-            "-DGNUPLOT",
+            "-std=c++17",
+            "-fPIC",
             "function.cpp"
         ],
         "directory": "/home/geonove/PACS/challenges/challenge1",

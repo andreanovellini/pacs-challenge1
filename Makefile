@@ -9,7 +9,7 @@ main: main.o function.o
 	$(CXX) $(LDFLAGS) $(LIBS) main.o function.o -o main
 
 main.o: main.cpp
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -I${HOME}/PACS/pacs-examples/Examples/include -c main.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -I./ -c main.cpp
 
 function.o: function.cpp function.hpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c function.cpp

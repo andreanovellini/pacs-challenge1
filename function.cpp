@@ -27,20 +27,20 @@ Newton(const Function &f, double h, double a , double tol = 1e-4, double tola = 
 };
 
 bool
-solver(std::vector<double> &t, std::vector<double> &u, const std::function<double (const double &, const double &)> &f, const double &t0, const double &y0, const double &T, const double &N)
+solver(std::vector<double> &t, std::vector<double> &u, const std::function<double (const double &, const double &)> &f, const double &t0, const double &y0, const double &T, const unsigned int &N)
 {
-	double h = T/N;
+	const double h = T/static_cast<double>(N);
 	t.push_back(t0);
 	u.push_back(y0);
 
 	for(unsigned int n = 0; n < N - 1; n++){
-		double t_n_plus_1 = (n+1)*h;
+		double t_n_plus_1 = t[n] + h;
 		t.push_back(t_n_plus_1);
 		double u_n = u[n];
 		auto F = [h, f, t_n_plus_1, u_n](const double &x) {return x-h*f(t_n_plus_1, x) - u_n;};
 		auto res = Newton(F, h, u_n);
 		if(std::get<1>(res)==0){
-			std::cout << "Did not converge at time " << t.at(n) << std::endl;
+			std::cout << "Did not converge at time " << t.at(n+1) << std::endl;
 			return 0;	 		
 		}
 		else {

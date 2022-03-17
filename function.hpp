@@ -32,7 +32,7 @@ Newton(Function const &f, double h, double a, double tol, double tola, unsigned 
  *
  */
 bool
-solver(std::vector<double> &t, std::vector<double> &u, const std::function<double(const double &, const double &)> &f, const double &t0, const double &y0, const double &T, const double &N); 
+solver(std::vector<double> &t, std::vector<double> &u, const std::function<double(const double &, const double &)> &f, const double &t0, const double &y0, const double &T, const unsigned int &N); 
 
 
 #endif
