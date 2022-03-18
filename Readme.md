@@ -15,4 +15,5 @@ Example of execution: `./main N=150 theta=0.5 t0=0.0 T=1.0 u0=0.0`.
 By default: N = 100, theta = 1 (Backward Euler scheme), t0 = 0.0, T = 1.0, u0 = 0.0.
 
 In this directory, `make` produces the executable which is just called `main`.
-The program is structured so that it will plot automatically the solution using GnuPlot and it can be run by calling the command `./main`.
+The program is structured so that it will plot automatically the numeric solution, alongside the exact one, using GnuPlot and it can be run by calling the command `./main`.
+

@@ -26,9 +26,9 @@ int main(int argc, char **argv) {
 	// Get the parameters using GetPot	
 	GetPot command_line(argc, argv);
 
-	const double t0 = command_line("t0", 0);	// Initial time
-	const double u0 = command_line("u0", 0);	// Initial value
-	const double T = command_line("T", 1);	// Upper bound time
+	const double t0 = command_line("t0", 0.);	// Initial time
+	const double u0 = command_line("u0", 0.);	// Initial value
+	const double T = command_line("T", 1.);	// Upper bound time
 	const unsigned int N = command_line("N", 100);	// Number of sub-intervals
 	const double theta = command_line("theta", 1.);	// parameter for theta method
 
