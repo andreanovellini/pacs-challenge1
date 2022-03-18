@@ -8,7 +8,7 @@
 /*!
  * Computes the zero of a scalar function with the Newton (the derivative is computed with the symmetric difference quotient formula
  * @param f the function
- * @param h the step
+ * @param df the derivative of f
  * @param a the initial point
  * @param tol relative tolerance
  * @param tola absolute tolerance
@@ -16,9 +16,9 @@
  * @return The approximation of the zero of f and a status (false if not converging)
  *
  */
-template<class Function, class Dfunction>
+
 std::tuple<double, bool>
-Newton(Function const &f, double h, double a, double tol, double tola, unsigned int maxIt);
+Newton(const std::function<double(const double &)> &f, const std::function<double(const double &)> &df, double a, const double &tol = 1e-4, const double &tola = 1e-10, const unsigned int &maxIt = 150);
 
 /*!
  * Solves the initial value problem using backward Euler scheme
@@ -35,7 +35,7 @@ Newton(Function const &f, double h, double a, double tol, double tola, unsigned 
  *
  */
 bool
-solver(std::vector<double> &t, std::vector<double> &u, const std::function<double(const double &, const double &)> &f, const double &t0, const double &u0, const double &T, const unsigned int &N, const double &theta); 
+solver(std::vector<double> &t, std::vector<double> &u, const std::function<double(const double &, const double &)> &f, const double &t0, const double &u0, const double &T, const unsigned int &N, const double &theta = 1.0); 
 
 
 #endif

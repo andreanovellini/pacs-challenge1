@@ -1,10 +1,11 @@
 #include "function.hpp"
 #include <cmath>
+#include <functional>
 #include <iostream>
 
-template <class Function>
+
 std::tuple<double, bool>
-Newton(const Function &f, double h, double a , double tol = 1e-4, double tola = 1e-10, unsigned int maxIt = 150)
+Newton(const std::function<double(const double &)> &f, const std::function<double(const double &)> &df, double a , const double &tol, const double &tola, const unsigned int &maxIt)
 {
 	double ya = f(a);
 	double resid = std::abs(ya);
@@ -14,8 +15,7 @@ Newton(const Function &f, double h, double a , double tol = 1e-4, double tola = 
  	while (goOn && iter < maxIt) 
 	{
  		++iter;
-		const double df = (f(a+h)-f(a-h))/(2.*h);
-		a += -ya/df;
+		a += -ya/df(a);
 		ya = f(a); 
 		resid = std::abs(ya);
 		goOn = resid > check;
@@ -35,9 +35,11 @@ solver(std::vector<double> &t, std::vector<double> &u, const std::function<doubl
 	{
 		t.push_back(t.at(n)+h);	// new time instant
 		
-		auto F = [h, f, n, &t, &u, theta](const double &x) {return x-h*theta*f(t.at(n+1), x)-h*(1-theta)*f(t.at(n), u.at(n))-u.at(n);}; // function to pass in the Newton method 
+		auto F = [h, f, n, &t, &u, theta](const double &x) {return x-h*theta*f(t.at(n+1), x)-h*(1-theta)*f(t.at(n), u.at(n))-u.at(n);}; // function to pass in the Newton method
+
+		auto dF = [F, h](const double &x) {return (F(x+h)-F(x-h))/(2.*h);};	// derivative F, to pass to the Newton method	
 		
-		auto res = Newton(F, h, u.at(n)); // solution in the new time node
+		auto res = Newton(F, dF, u.at(n)); // solution in the new time node
 
 		if (!std::get<1>(res))
 		{
