@@ -1,4 +1,4 @@
-# Code to solve Cauchy problem
+# Code to solve Cauchy problem #
 
 This program computes the solution of the Cauchy problem dy(t)/dt = f(t,y) with initial condition y(t0)=u0 until final time T. In particular it considers f(t,y) = -t*exp(-y).
 
@@ -6,7 +6,8 @@ The program makes use of the theta-method to approximate the time derivative. Mo
 
 The following parameters are taken in input from command line thanks to GetPot: 1) theta = parameter of the theta-method; 2) N = number of time steps; 3) t0 = initial time; 4) T = final time; 5) u0 = initial condition.
 
-Example of execution: ./main N=150 theta=0.5 t0=0.0 T=1.0 u0=0.0 By default: N = 100, theta = 1 (Backward Euler scheme), t0 = 0.0, T = 1.0, u0 = 0.0.
+Example of execution: './main N=150 theta=0.5 t0=0.0 T=1.0 u0=0.0'
+By default: N = 100, theta = 1 (Backward Euler scheme), t0 = 0.0, T = 1.0, u0 = 0.0.
 
-In this directory, make produces the executable which is just called main.
-The program is structured so that it will plot automatically the solution using GnuPlot.
+In this directory, 'make' produces the executable which is just called 'main'.
+The program is structured so that it will plot automatically the solution using GnuPlot and it can be run by calling the command './main'.
