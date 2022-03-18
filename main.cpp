@@ -17,7 +17,7 @@ double fun(const double &t, const double &y)
 
 double u_ex(const double &t, const double &t0, const double &u0)
 {
-	return std::log(1 - t*t/2.);
+	return std::log(std::exp(u0) + t0*t0/2. - t*t/2.);
 }
 
 int main(int argc, char **argv) {
