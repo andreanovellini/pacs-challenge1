@@ -16,7 +16,6 @@
  * @return The approximation of the zero of f and a status (false if not converging)
  *
  */
-
 std::tuple<double, bool>
 Newton(const std::function<double(const double &)> &f, const std::function<double(const double &)> &df, double a, const double &tol = 1e-4, const double &tola = 1e-10, const unsigned int &maxIt = 150);
 
